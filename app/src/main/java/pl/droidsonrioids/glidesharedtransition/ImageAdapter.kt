@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 
-class ImageAdapter(private val images: List<String>) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
+class ImageAdapter(private val images: List<String>, private val onClick: (String) -> Unit) : RecyclerView.Adapter<ImageAdapter.ImageViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.image, parent, false)
@@ -17,9 +17,12 @@ class ImageAdapter(private val images: List<String>) : RecyclerView.Adapter<Imag
 
     override fun onBindViewHolder(holder: ImageViewHolder, position: Int) = holder.bind(images[position])
 
-    class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    inner class ImageViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         fun bind(url: String) {
-            (itemView as ImageView).load(url)
+            (itemView as ImageView).apply {
+                load(url)
+                setOnClickListener { onClick(url) }
+            }
         }
     }
 
