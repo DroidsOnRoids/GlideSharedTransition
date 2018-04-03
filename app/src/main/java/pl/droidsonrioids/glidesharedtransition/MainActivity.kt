@@ -2,6 +2,7 @@ package pl.droidsonrioids.glidesharedtransition
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -9,6 +10,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        mainImage.load("https://picsum.photos/3000/2000?image=141")
+        images.apply {
+            layoutManager = GridLayoutManager(context, 4)
+            adapter = ImageAdapter(photos())
+        }
     }
+
+    private fun photos() = (169..216)
+            .map { "https://picsum.photos/1000/700?image=$it" }
 }
