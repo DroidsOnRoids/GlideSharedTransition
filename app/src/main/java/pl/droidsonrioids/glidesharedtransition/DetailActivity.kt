@@ -12,7 +12,7 @@ class DetailActivity : AppCompatActivity() {
         supportPostponeEnterTransition()
         val url = intent.getStringExtra(IMAGE_URL_KEY)
         detailImage.transitionName = url
-        detailImage.load(url) {
+        detailImage.load(url, true) {
             supportStartPostponedEnterTransition()
         }
     }
