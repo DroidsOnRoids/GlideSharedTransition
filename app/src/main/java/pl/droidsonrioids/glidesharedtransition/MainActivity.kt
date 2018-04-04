@@ -3,10 +3,12 @@ package pl.droidsonrioids.glidesharedtransition
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityOptionsCompat
 import android.support.v7.widget.GridLayoutManager
+import android.view.View
 import kotlinx.android.synthetic.main.activity_main.*
 
-val IMAGE_URL_KEY = "url"
+const val IMAGE_URL_KEY = "url"
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,11 +21,12 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    fun goToDetails(url: String) {
+    fun goToDetails(url: String, imageView: View) {
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(this, imageView, imageView.transitionName).toBundle()
         Intent(this, DetailActivity::class.java)
                 .putExtra(IMAGE_URL_KEY, url)
                 .let {
-                    startActivity(it)
+                    startActivity(it, options)
                 }
     }
 

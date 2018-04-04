@@ -10,6 +10,7 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
         val url = intent.getStringExtra(IMAGE_URL_KEY)
+        detailImage.transitionName = url
         detailImage.load(url)
     }
 }
