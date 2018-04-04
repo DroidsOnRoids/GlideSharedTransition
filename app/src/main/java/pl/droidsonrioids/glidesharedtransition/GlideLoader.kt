@@ -21,9 +21,11 @@ fun ImageView.load(url: String, onLoadingFinished: () -> Unit = {}) {
             return false
         }
     }
+    val requestOptions = RequestOptions.placeholderOf(R.drawable.placeholder)
+            .override(Target.SIZE_ORIGINAL)
     Glide.with(this)
             .load(url)
-            .apply(RequestOptions.placeholderOf(R.drawable.placeholder))
+            .apply(requestOptions)
             .listener(listener)
             .into(this)
 }
