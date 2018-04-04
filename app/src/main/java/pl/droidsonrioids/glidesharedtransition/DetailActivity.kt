@@ -9,8 +9,11 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        supportPostponeEnterTransition()
         val url = intent.getStringExtra(IMAGE_URL_KEY)
         detailImage.transitionName = url
-        detailImage.load(url)
+        detailImage.load(url) {
+            supportStartPostponedEnterTransition()
+        }
     }
 }
