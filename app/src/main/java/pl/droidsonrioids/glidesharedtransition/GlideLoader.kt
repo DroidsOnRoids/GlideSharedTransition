@@ -9,7 +9,7 @@ import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.Target
 
-fun ImageView.load(url: String, onLoadingFinished: () -> Unit = {}) {
+fun ImageView.load(url: String, loadOnlyFromCache: Boolean = false, onLoadingFinished: () -> Unit = {}) {
     val listener = object : RequestListener<Drawable> {
         override fun onLoadFailed(e: GlideException?, model: Any?, target: Target<Drawable>?, isFirstResource: Boolean): Boolean {
             onLoadingFinished()
@@ -23,6 +23,7 @@ fun ImageView.load(url: String, onLoadingFinished: () -> Unit = {}) {
     }
     val requestOptions = RequestOptions.placeholderOf(R.drawable.placeholder)
             .dontTransform()
+            .onlyRetrieveFromCache(loadOnlyFromCache)
     Glide.with(this)
             .load(url)
             .apply(requestOptions)
