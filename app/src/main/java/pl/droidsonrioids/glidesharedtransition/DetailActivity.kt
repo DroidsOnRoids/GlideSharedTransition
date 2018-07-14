@@ -2,10 +2,7 @@ package pl.droidsonrioids.glidesharedtransition
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.transition.ChangeBounds
-import android.transition.ChangeImageTransform
-import android.transition.Transition
-import android.transition.TransitionSet
+import android.transition.*
 import androidx.core.transition.doOnEnd
 import kotlinx.android.synthetic.main.activity_detail.*
 
@@ -29,5 +26,10 @@ class DetailActivity : AppCompatActivity() {
                 .apply {
                     doOnEnd { detailImage.load(url) }
                 }
+        window.enterTransition = Fade().apply {
+            excludeTarget(android.R.id.statusBarBackground, true)
+            excludeTarget(android.R.id.navigationBarBackground, true)
+            excludeTarget(R.id.action_bar_container, true)
+        }
     }
 }
